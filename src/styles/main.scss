@@ -1,0 +1,106 @@
+@use './variables' as vars;
+@use "sass:color";
+
+.app {
+  display: flex;
+  height: 100vh;
+  font-family: vars.$font-family-base;
+  background-color: vars.$primary-bg;
+
+  .navbar {
+    width: 10%;
+    min-width: 150px;
+    background-color: vars.$secondary-bg;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid color.adjust(vars.$secondary-bg, $lightness: -10%);
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        margin-bottom: 1.5rem;
+
+        a {
+          color: vars.$primary-color;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 1rem;
+          transition: all 0.2s ease;
+
+          &.active {
+            color: vars.$primary-color-dark;
+            border-left: 4px solid vars.$primary-color;
+            padding-left: 0.5rem;
+          }
+
+          &:hover {
+            color: color.adjust(vars.$primary-color, $lightness: -10%);
+            position: relative;
+
+            &::after {
+              content: '';
+              position: absolute;
+              left: 0;
+              bottom: -4px;
+              width: 100%;
+              height: 3px;
+              background-color: vars.$primary-color;
+              border-radius: 2px;
+              box-shadow: 0 2px 6px rgba(59,130,246,0.4);
+              transform: scaleX(0);
+              animation: slideIn 0.3s forwards;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .main {
+    width: 90%;
+    height: 100%;
+    background-color: vars.$primary-bg;
+    padding: 2rem;
+    border-left: 1px solid color.adjust(vars.$secondary-bg, $lightness: -10%);
+    display: flex;
+    justify-content: center; // vízszintesen középre zárás
+    align-items: flex-start; // fentről induljon a content
+
+    .content-wrapper {
+      width: 100%; 
+    }
+
+    .data-list {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      font-size: 0.95rem;
+      background-color: vars.$secondary-bg;
+
+      thead { background-color: color.adjust(vars.$primary-bg, $lightness: 5%); }
+      th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid color.adjust(vars.$primary-bg, $lightness: -10%); }
+
+      tr:hover { background-color: color.adjust(vars.$primary-bg, $lightness: 10%); transition: background-color 0.2s; }
+    }
+
+    .loading, .error, .empty {
+      text-align: center;
+      padding: 2rem;
+      color: vars.$primary-color-dark;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+@keyframes slideIn {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
