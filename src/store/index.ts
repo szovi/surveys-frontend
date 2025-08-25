@@ -1,13 +1,16 @@
-import { configureStore } from "@reduxjs/toolkit";
-import surveysReducer from '../features/surveys/surveySlice';
-import availableParticipantsReducer from '../features/members/availableParticipantsSlice';
+import { configureStore } from "@reduxjs/toolkit"
+import { api } from "../services/api"
 
+// ha maradna más reducer (pl. UI state), azt is itt regisztrálhatjuk
 export const store = configureStore({
-    reducer: {
-        survey: surveysReducer,
-        availableParticipants: availableParticipantsReducer,
-    },
+  reducer: {
+    [api.reducerPath]: api.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(api.middleware),
+  devTools: true,
 })
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+// típusaliasok
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

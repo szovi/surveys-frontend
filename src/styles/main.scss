@@ -3,7 +3,7 @@
 
 .app {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   font-family: vars.$font-family-base;
   background-color: vars.$primary-bg;
 
@@ -62,41 +62,29 @@
 
   .main {
     width: 90%;
-    height: 100%;
+    min-height: 100vh;
     background-color: vars.$primary-bg;
-    padding: 2rem;
     border-left: 1px solid color.adjust(vars.$secondary-bg, $lightness: -10%);
     display: flex;
-    justify-content: center; // vízszintesen középre zárás
-    align-items: flex-start; // fentről induljon a content
+    flex-direction: column;
+    padding: 2rem;
+    overflow-y: auto; // teljes oldal scroll
 
     .content-wrapper {
-      width: 100%; 
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0; // flex scroll miatt
+      gap: 1rem;
     }
+  }
 
-    .data-list {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      font-size: 0.95rem;
-      background-color: vars.$secondary-bg;
-
-      thead { background-color: color.adjust(vars.$primary-bg, $lightness: 5%); }
-      th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid color.adjust(vars.$primary-bg, $lightness: -10%); }
-
-      tr:hover { background-color: color.adjust(vars.$primary-bg, $lightness: 10%); transition: background-color 0.2s; }
-    }
-
-    .loading, .error, .empty {
-      text-align: center;
-      padding: 2rem;
-      color: vars.$primary-color-dark;
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
+  .loading, .error, .empty {
+    text-align: center;
+    padding: 2rem;
+    color: vars.$primary-color-dark;
+    font-weight: bold;
+    font-size: 1.1rem;
   }
 }
 

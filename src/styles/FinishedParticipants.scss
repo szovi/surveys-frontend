@@ -1,0 +1,13 @@
+.finished-participants {
+    display: grid;
+    gap: 12px;
+  
+    .active-icon {
+      color: green;
+    }
+  
+    .inactive-icon {
+      color: red;
+    }
+  }
+  

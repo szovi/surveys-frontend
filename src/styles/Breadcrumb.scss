@@ -1,0 +1,28 @@
+@use './variables' as vars;
+
+.breadcrumb-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: vars.$breadcrumb-bg;
+  padding: 0.5rem 1rem;
+  border-radius: vars.$breadcrumb-radius;
+  border: 1px solid vars.$breadcrumb-border;
+  font-family: vars.$font-family-base;
+  font-size: 2rem;
+
+  a {
+    color: vars.$breadcrumb-link-color;
+    text-decoration: none;
+    margin-right: 0.5rem;
+
+    &:hover {
+      color: vars.$breadcrumb-link-hover-color;
+      text-decoration: underline;
+    }
+  }
+
+  .breadcrumb-separator {
+    margin-right: 0.5rem;
+    color: #6c757d;
+  }
+}

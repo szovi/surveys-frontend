@@ -6,3 +6,10 @@ $secondary-bg: #ffffff;
 
 // Fonts
 $font-family-base: 'Inter', Arial, sans-serif;
+
+// Breadcrumb
+$breadcrumb-bg: $secondary-bg; // fehér, mint a táblázatok
+$breadcrumb-border: darken($secondary-bg, 10%);
+$breadcrumb-radius: 6px;
+$breadcrumb-link-color: $primary-color;
+$breadcrumb-link-hover-color: $primary-color-dark;
