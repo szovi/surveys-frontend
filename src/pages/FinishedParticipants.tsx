@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from "react"
 import { useParams } from "react-router-dom"
 import DataList, { type Column } from "../components/DataList"
-import type { AvailableParticipantDTO } from "../entities/AvailableParticipant"
 import { useGetFinishedParticipantsPageQuery } from "../services/membersApi"
 import Breadcrumb from "../components/Layout/Breadcrumb"
 import { Breadcrumbs } from "../utils/breadcrumbMapper"
 import { FaCheck, FaTimes } from "react-icons/fa"
 import "../styles/FinishedParticipants.scss"
+import type { MemberDTO } from "../entities/Member"
 
 const DEFAULT_PAGE_SIZE = 20;
 
@@ -30,7 +30,7 @@ const FinishedParticipants: React.FC = () => {
     refetch();
   }
 
-  const columns: Column<AvailableParticipantDTO>[] = useMemo(() => [
+  const columns: Column<MemberDTO>[] = useMemo(() => [
     { header: "Member Id", accessor: "memberId", sortable: true },
     { header: "Full Name", accessor: "fullName", sortable: true },
     { header: "E-mail Address", accessor: "emailAddress", sortable: true },
@@ -55,7 +55,7 @@ const FinishedParticipants: React.FC = () => {
     <div className="finished-participants">
       <Breadcrumb items={Breadcrumbs.finishedParticipants(surveyId!)} />
 
-      <DataList<AvailableParticipantDTO>
+      <DataList<MemberDTO>
         columns={columns}
         page={pageData}
         loading={isLoading || isFetching}

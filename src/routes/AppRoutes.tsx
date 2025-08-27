@@ -3,6 +3,7 @@ import SurveyList from "../pages/SurveyList"
 import AvailableParticipants from "../pages/AvailableParticipants"
 import FinishedParticipants from "../pages/FinishedParticipants"
 import UploadForm from "../components/Form/UploadForm"
+import CompletedSurveys from "../pages/CompletedSurveys"
 
 
 const AppRoutes: React.FC = () => {
@@ -11,7 +12,7 @@ const AppRoutes: React.FC = () => {
             <Route path="/surveys" element={<SurveyList />} />
             <Route path="/surveys/:surveyId/available-participants" element={<AvailableParticipants />} />
             <Route path="/surveys/:surveyId/finished-participants" element={<FinishedParticipants />} />
-            <Route path="/members/:memberId/completed-surveys" element={<div>Completed Surveys</div>} />
+            <Route path="/members/:memberId/completed-surveys" element={<CompletedSurveys />} />
             <Route path="/upload" element={<UploadForm />} />
         </Routes>
     )

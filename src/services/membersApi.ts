@@ -1,10 +1,10 @@
 import { api } from "./api"
-import type { AvailableParticipantDTO } from "../entities/AvailableParticipant"
+import type { MemberDTO } from "../entities/Member"
 
 export const membersApi = api.injectEndpoints({
   endpoints: (build) => ({
     getAvailableParticipantsPage: build.query<{
-      content: AvailableParticipantDTO[]
+      content: MemberDTO[]
       pageNumber: number
       pageSize: number
       totalElements: number
@@ -18,7 +18,7 @@ export const membersApi = api.injectEndpoints({
     }),
 
     getFinishedParticipantsPage: build.query<{
-      content: AvailableParticipantDTO[]
+      content: MemberDTO[]
       pageNumber: number
       pageSize: number
       totalElements: number
