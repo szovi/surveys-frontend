@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, type ReactNode } from "react";
+import React, { createContext, useContext, useState, type ReactNode } from 'react';
 
 export interface BreadcrumbItem {
   label: string
@@ -25,7 +25,7 @@ export const useBreadcrumb = () => {
   const context = useContext(BreadcrumbContext);
   
   if (!context) {
-    throw new Error("useBreadcrumb must be used within a BreadcrumbProvider");
+    throw new Error('useBreadcrumb must be used within a BreadcrumbProvider');
   }
 
   return context

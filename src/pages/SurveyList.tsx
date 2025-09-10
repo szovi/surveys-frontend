@@ -1,18 +1,18 @@
-import { useState, useMemo } from "react"
-import { NavLink } from "react-router-dom"
-import DataList, { type Column } from "../components/DataList"
-import type { SurveyStatDTO } from "../entities/SurveyStat"
-import { useGetSurveyStatsPageQuery } from "../services/surveysApi"
-import Breadcrumb from "../components/Layout/Breadcrumb"
-import { Breadcrumbs } from "../utils/breadcrumbMapper"
-
-const DEFAULT_PAGE_SIZE = 20
+import { useState, useMemo } from 'react'
+import { NavLink } from 'react-router-dom'
+import DataList from '../components/DataList'
+import type { SurveyStatDTO } from '../entities/SurveyStat'
+import { useGetSurveyStatsPageQuery } from '../services/surveysApi'
+import Breadcrumb from '../components/Layout/Breadcrumb'
+import { Breadcrumbs } from '../utils/breadcrumbMapper'
+import type { Column } from '../types/DataListTypes'
+import { DEFAULT_PAGE_SIZE } from '../constants'
 
 const SurveyList: React.FC = () => {
   const [page, setPage] = useState(1)
-  const [sortState, setSortState] = useState<{ accessor: string; direction: "ASC" | "DESC" }>({
-    accessor: "surveyId",
-    direction: "ASC",
+  const [sortState, setSortState] = useState<{ accessor: string; direction: 'ASC' | 'DESC' }>({
+    accessor: 'surveyId',
+    direction: 'ASC',
   })
 
   const { data: pageData, isLoading, isFetching, error, refetch } = useGetSurveyStatsPageQuery({
@@ -22,15 +22,15 @@ const SurveyList: React.FC = () => {
   })
 
   const columns: Column<SurveyStatDTO>[] = useMemo(() => [
-    { header: "Survey ID", accessor: "surveyId", sortable: true },
-    { header: "Survey Name", accessor: "name", sortable: true },
-    { header: "Completed", accessor: "numberOfCompletes" },
-    { header: "Filtered Participants", accessor: "numberOfFilteredParticipants" },
-    { header: "Rejected Participants", accessor: "numberOfRejectedParticipants" },
-    { header: "Avg Time Spent On", accessor: "averageLengthOfTimeSpentOnSurvey" },
+    { header: 'Survey ID', accessor: 'surveyId', sortable: true },
+    { header: 'Survey Name', accessor: 'name', sortable: true },
+    { header: 'Completed', accessor: 'numberOfCompletes', sortable: true },
+    { header: 'Filtered Participants', accessor: 'numberOfFilteredParticipants', sortable: true },
+    { header: 'Rejected Participants', accessor: 'numberOfRejectedParticipants', sortable: true },
+    { header: 'Avg Time Spent On', accessor: 'averageLengthOfTimeSpentOnSurvey', sortable: true },
     { 
-      header: "Available Participants", 
-      accessor: "surveyId", 
+      header: 'Available Participants', 
+      accessor: 'surveyId', 
       sortable: false,
       render: item => (
         <NavLink 
@@ -42,8 +42,8 @@ const SurveyList: React.FC = () => {
       ) 
     },
     { 
-      header: "Finished Participants", 
-      accessor: "surveyId", 
+      header: 'Finished Participants', 
+      accessor: 'surveyId', 
       sortable: false,
       render: item => (
         <NavLink 
@@ -57,12 +57,12 @@ const SurveyList: React.FC = () => {
   ], [])
 
   const errorText = error 
-    ? ("status" in error 
-        ? (typeof error.data === "string" ? error.data : JSON.stringify(error.data)) 
-        : (error as any)?.message ?? "Request failed") 
+    ? ('status' in error 
+        ? (typeof error.data === 'string' ? error.data : JSON.stringify(error.data)) 
+        : (error as any)?.message ?? 'Request failed') 
     : null
 
-  const handleSortChange = (accessor: string, direction: "ASC" | "DESC") => {
+  const handleSortChange = (accessor: string, direction: 'ASC' | 'DESC') => {
     setSortState({ accessor, direction });
     refetch()
   }
@@ -79,7 +79,6 @@ const SurveyList: React.FC = () => {
         onPageChange={setPage}
         sortState={sortState}
         onSortChange={handleSortChange}
-        showPagerTop
         showPagerBottom
       />
     </div>

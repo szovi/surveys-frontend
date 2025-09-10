@@ -89,3 +89,84 @@
     }
 }
   
+.upload-note {
+  margin: 16px 0;
+
+  .note-header {
+    background-color: #ff4d4f;
+    color: white;
+    font-weight: bold;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    user-select: none;
+  }
+
+  .note-content {
+    border: 1px solid #ff4d4f;
+    border-top: none;
+    padding: 12px;
+    background-color: #fff1f0;
+    border-radius: 0 0 4px 4px;
+
+    p, ol {
+      margin: 8px 0;
+    }
+
+    ol {
+      padding-left: 20px;
+    }
+  }
+}
+
+.upload-form-page {
+  .upload-form {
+    .form-row {
+      .form-group {
+        flex: 0 0 300px;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        input[type="file"] {
+          opacity: 0;            
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          cursor: pointer;
+        }
+
+        label[for="file"] {
+          display: inline-block;
+          padding: 0.5rem 1rem;
+          background-color: #3b82f6;
+          color: #fff;
+          border-radius: 6px;
+          cursor: pointer;
+          transition: 0.2s;
+          font-weight: 500;
+          width: auto;
+
+          &:hover {
+            background-color: #1e40af;
+          }
+        }
+
+        .file-name {
+          margin-top: 4px;
+          font-size: 0.9rem;
+          color: #555;
+          font-style: italic;
+        }
+
+        .error {
+          color: red;
+          font-size: 0.85rem;
+          margin-top: 0.25rem;
+        }
+      }
+    }
+  }
+}

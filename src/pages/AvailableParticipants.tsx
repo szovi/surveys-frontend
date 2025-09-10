@@ -1,14 +1,15 @@
-import React, { useState, useMemo } from "react"
-import { NavLink, useParams, useLocation } from "react-router-dom"
-import DataList, { type Column } from "../components/DataList"
-import { useGetAvailableParticipantsPageQuery } from "../services/membersApi"
-import Breadcrumb from "../components/Layout/Breadcrumb"
-import { Breadcrumbs } from "../utils/breadcrumbMapper"
-import "../styles/Breadcrumb.scss"
-import { FaCheck, FaTimes } from "react-icons/fa"
-import type { MemberDTO } from "../entities/Member"
+import React, { useState, useMemo } from 'react'
+import { NavLink, useParams, useLocation } from 'react-router-dom'
+import DataList from '../components/DataList'
+import { useGetAvailableParticipantsPageQuery } from '../services/membersApi'
+import Breadcrumb from '../components/Layout/Breadcrumb'
+import { Breadcrumbs } from '../utils/breadcrumbMapper'
+import '../styles/Breadcrumb.scss'
+import { FaCheck, FaTimes } from 'react-icons/fa'
+import type { MemberDTO } from '../entities/Member'
+import type { Column } from '../types/DataListTypes'
+import { DEFAULT_PAGE_SIZE } from '../constants'
 
-const DEFAULT_PAGE_SIZE = 20;
 
 const AvailableParticipants: React.FC = () => {
   const { surveyId } = useParams<{ surveyId: string }>()
@@ -16,9 +17,9 @@ const AvailableParticipants: React.FC = () => {
   const surveyName = (location.state as { surveyName?: string })?.surveyName
 
   const [page, setPage] = useState(1);
-  const [sortState, setSortState] = useState<{ accessor: string; direction: "ASC" | "DESC" }>({
-    accessor: "fullName",
-    direction: "ASC",
+  const [sortState, setSortState] = useState<{ accessor: string; direction: 'ASC' | 'DESC' }>({
+    accessor: 'fullName',
+    direction: 'ASC',
   })
 
   const { data: pageData, isLoading, isFetching, error, refetch } = useGetAvailableParticipantsPageQuery({
@@ -28,18 +29,18 @@ const AvailableParticipants: React.FC = () => {
     sort: [`${sortState.accessor},${sortState.direction}`],
   })
 
-  const handleSortChange = (accessor: string, direction: "ASC" | "DESC") => {
+  const handleSortChange = (accessor: string, direction: 'ASC' | 'DESC') => {
     setSortState({ accessor, direction })
     refetch()
   }
 
   const columns: Column<MemberDTO>[] = useMemo(() => [
-    { header: "Member Id", accessor: "memberId", sortable: true },
-    { header: "Full Name", accessor: "fullName", sortable: true },
-    { header: "E-mail Address", accessor: "emailAddress", sortable: true },
+    { header: 'Member Id', accessor: 'memberId', sortable: true },
+    { header: 'Full Name', accessor: 'fullName', sortable: true },
+    { header: 'E-mail Address', accessor: 'emailAddress', sortable: true },
     { 
-      header: "Is Active", 
-      accessor: "isActive",
+      header: 'Is Active', 
+      accessor: 'isActive',
       sortable: true,
       render: (item) => 
         item.isActive 
@@ -47,27 +48,35 @@ const AvailableParticipants: React.FC = () => {
           : <FaTimes className="cell-center" style={{ color: "red" }} />
     },
     { 
-      header: "Completed Surveys", 
-      accessor: "memberId", 
+      header: 'Completed Surveys', 
+      accessor: 'memberId', 
       render: item => 
-        <NavLink to={`/members/${item.memberId}/completed-surveys`} className="cell-link">
+        <NavLink
+          to={`/members/${item.memberId}/completed-surveys`}
+          state={{ surveyId, surveyName, memberName: item.fullName }}
+          className="cell-link"
+        >
           View
-        </NavLink> 
+        </NavLink>
     },
     { 
-      header: "Survey Points",
-      accessor: "memberId", 
+      header: 'Survey Points',
+      accessor: 'memberId', 
       render: item => 
-        <NavLink to={`/members/${item.memberId}/survey-points`} className="cell-link">
+        <NavLink 
+          to={`/members/${item.memberId}/survey-points`} 
+          state={{ surveyId, surveyName, memberName: item.fullName }}
+          className="cell-link"
+        >
           View
         </NavLink> 
     },
   ], [])
 
   const errorText = error 
-    ? ("status" in error 
-      ? (typeof error.data === "string" ? error.data : JSON.stringify(error.data)) 
-      : (error as any)?.message ?? "Request failed") 
+    ? ('status' in error 
+      ? (typeof error.data === 'string' ? error.data : JSON.stringify(error.data)) 
+      : (error as any)?.message ?? 'Request failed') 
     : null
 
   return (

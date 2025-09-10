@@ -1,0 +1,11 @@
+.sortable-header {
+    user-select: none;
+  }
+  
+  .sortable-header.sortable {
+    cursor: pointer;
+  }
+  
+  .sortable-header.active {
+    font-weight: bold;
+  }

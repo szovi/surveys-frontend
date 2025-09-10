@@ -1,4 +1,4 @@
-import type React from "react"
+import type React from 'react'
 import '../../styles/main.scss'
 
 interface MainProps {

@@ -1,6 +1,6 @@
-import React from "react"
-import { NavLink } from "react-router-dom"
-import type { BreadcrumbItem } from "../../context/BreadcrumbContext"
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import type { BreadcrumbItem } from '../../context/BreadcrumbContext'
 
 interface BreadcrumbProps {
   items: BreadcrumbItem[]

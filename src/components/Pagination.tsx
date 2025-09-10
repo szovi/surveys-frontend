@@ -1,18 +1,13 @@
-import React from "react"
-
-interface PaginationProps {
-  currentPage: number
-  totalPages: number
-  onPageChange: (page: number) => void
-  disabled?: boolean
-}
+import React from 'react'
+import type { PaginationProps } from '../types/PaginationTypes'
+import '../styles/Pagination.scss'
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange, disabled = false }) => {
   const canPrev = !disabled && currentPage > 1
   const canNext = !disabled && currentPage < totalPages
 
   return (
-    <div className="pagination" style={{ display: "flex", gap: 8, alignItems: "center", justifyContent: "center", marginTop: 12 }}>
+    <div className="pagination">
       <button onClick={() => canPrev && onPageChange(currentPage - 1)} disabled={!canPrev}>
         ◀ Prev
       </button>
